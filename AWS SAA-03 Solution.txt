@@ -1045,7 +1045,7 @@ D. Use Amazon CloudFront with the S3 bucket as its origin.
 
 167.A company runs a production application on a fleet of Amazon EC2 instances. The application reads the data from an Amazon SQS queue and processes the messages in parallel. The message volume is unpredictable and often has intermittent traffic. This application should continually process messages without any downtime.
 Which solution meets these requirements MOST cost-effectively? 
-C. Use Reserved Instances for the baseline capacity and use Spot Instances to handle additional capacity.
+D. Use Reserved Instances for the baseline capacity and use On-Demand Instances to handle additional capacity.
 
 168.A security team wants to limit access to specific services or actions in all of the team’s AWS accounts. All accounts belong to a large organization in AWS Organizations. The solution must be scalable and there must be a single point where permissions can be maintained.
 D. Create a service control policy in the root organizational unit to deny access to the services or actions. 
