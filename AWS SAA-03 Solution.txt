@@ -1130,9 +1130,6 @@ A development team recently created an AWS Lambda function through the console. 
 Which solution will meet these requirements?
 
     A. Configure the Lambda function to run in the VPC with the appropriate security group.
-    B. Set up a VPN connection from AWS to the data center. Route the traffic from the Lambda function through the VPN.
-    C. Update the route tables in the VPC to allow the Lambda function to access the on-premises data center through Direct Connect.
-    D. Create an Elastic IP address. Configure the Lambda function to send traffic through the Elastic IP address without an elastic network interface.
 
 185.A company runs an application using Amazon ECS. The application creates resized versions of an original image and then makes Amazon S3 API calls to store the resized images in Amazon S3.
 How can a solutions architect ensure that the application has permission to access Amazon S3?
