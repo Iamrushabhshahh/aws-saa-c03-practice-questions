@@ -1187,9 +1187,73 @@ B. Deploy the web application to an AWS Elastic Beanstalk environment. Use URL s
 Elastic Beanstalk allows you to perform blue-green deployments, which involve creating a new environment (green) with the updated code, testing it, and then swapping the URLs to direct traffic to the new environment. This enables you to test new features without affecting the production environment.
 -------------------------------------------------------------------------
 
+191] A company has an ordering application that stores customer information in Amazon RDS for MySQL. During regular business hours, employees run one-time queries for reporting purposes. Timeouts are occurring during order processing because the reporting queries are taking a long time to run. The company needs to eliminate the timeouts without preventing employees from performing queries.
 
+What should a solutions architect do to meet these requirements?
 
- 
+A. Create a read replica. Move reporting queries to the read replica.
+
+192] A hospital wants to create digital copies for its large collection of historical written records. The hospital will continue to add hundreds of new documents each day. The hospital’s data team will scan the documents and will upload the documents to the AWS Cloud.
+
+A solutions architect must implement a solution to analyze the documents, extract the medical information, and store the documents so that an application can run SQL queries on the data. The solution must maximize scalability and operational efficiency.
+
+Which combination of steps should the solutions architect take to meet these requirements? (Choose two.)
+
+B. Write the document information to an Amazon S3 bucket. Use Amazon Athena to query the data.
+E. Create an AWS Lambda function that runs when new documents are uploaded. Use Amazon Textract to convert the documents to raw text.  Use Amazon Comprehend Medical to detect and extract relevant medical information from the text.
+
+193] A company is running a batch application on Amazon EC2 instances. The application consists of a backend with multiple Amazon RDS databases.
+
+The application is causing a high number of reads on the databases. A solutions architect must reduce the number of database reads while
+ensuring high availability.
+
+What should the solutions architect do to meet this requirement?
+
+B. Use Amazon ElastiCache for Redis.
+
+194] A company needs to run a critical application on AWS. The company needs to use Amazon EC2 for the application’s database. The database must be highly available and must fail over automatically if a disruptive event occurs.
+
+Which solution will meet these requirements?
+
+A. Launch two EC2 instances, each in a different Availability Zone in the same AWS Region. Install the database on both EC2 instances.
+Configure the EC2 instances as a cluster. Set up database replication.
+
+195] A company’s order system sends requests from clients to Amazon EC2 instances. The EC2 instances process the orders and then store the orders in a database on Amazon RDS. Users report that they must reprocess orders when the system fails. The company wants a resilient solution that can process orders automatically if a system outage occurs.
+
+What should a solutions architect do to meet these requirements?
+
+C. Move the EC2 instances into an Auto Scaling group. Configure the order system to send messages to an Amazon Simple Queue Service (Amazon SQS) queue. Configure the EC2 instances to consume messages from the queue.
+
+196] A company runs an application on a large fleet of Amazon EC2 instances. The application reads and writes entries into an Amazon DynamoDB table. The size of the DynamoDB table continuously grows, but the application needs only data from the last 30 days. The company needs a solution that minimizes cost and development effort.
+
+Which solution meets these requirements?
+
+D. Extend the application to add an attribute that has a value of the current timestamp plus 30 days to each new item that is created in the table. Configure DynamoDB to use the attribute as the TTL attribute.
+
+197] A company has a Microsoft .NET application that runs on an on-premises Windows Server. The application stores data by using an Oracle Database Standard Edition server. The company is planning a migration to AWS and wants to minimize development changes while moving the application. The AWS application environment should be highly available.
+
+Which combination of actions should the company take to meet these requirements? (Choose two.)
+
+B. Rehost the application in AWS Elastic Beanstalk with the .NET platform in a Multi-AZ deployment.
+E. Use AWS Database Migration Service (AWS DMS) to migrate from the Oracle database to Oracle on Amazon RDS in a Multi-AZ deployment.
+
+198] A company runs a containerized application on a Kubernetes cluster in an on-premises data center. The company is using a MongoDB database for data storage. The company wants to migrate some of these environments to AWS, but no code changes or deployment method changes are possible at this time. The company needs a solution that minimizes operational overhead.
+
+Which solution meets these requirements?
+
+D. Use Amazon Elastic Kubernetes Service (Amazon EKS) with AWS Fargate for compute and Amazon DocumentDB (with MongoDB compatibility) for data storage.
+
+199] A telemarketing company is designing its customer call center functionality on AWS. The company needs a solution that provides multiple speaker recognition and generates transcript files. The company wants to query the transcript files to analyze the business patterns. The transcript files must be stored for 7 years for auditing purposes.
+
+Which solution will meet these requirements?
+
+B. Use Amazon Transcribe for multiple speaker recognition. Use Amazon Athena for transcript file analysis.
+
+200] A company hosts its application on AWS. The company uses Amazon Cognito to manage users. When users log in to the application, the application fetches required data from Amazon DynamoDB by using a REST API that is hosted in Amazon API Gateway. The company wants an AWS managed solution that will control access to the REST API to reduce development efforts.
+
+Which solution will meet these requirements with the LEAST operational overhead?
+
+D. Configure an Amazon Cognito user pool authorizer in API Gateway to allow Amazon Cognito to validate each request.
 
 201] A company is developing a marketing communications service that targets mobile app users. The company needs to send its users confirmation messages with Short Message Service (SMS). The users must be able to reply to the SMS messages. The company must store the responses for a year for analysis.
 
@@ -1253,11 +1317,15 @@ C. Create an Amazon EventBridge (Amazon CloudWatch Events) rule for the CreateIm
 Amazon EventBridge (formerly CloudWatch Events) provides a simple and efficient way to respond to events in AWS services. By creating an EventBridge rule specifically for the CreateImage API call, you can easily configure an SNS topic as the target to send alerts when the event is detected.
 --------------------------------------------------------------------------------
 
-207] 
+207] A company owns an asynchronous API that is used to ingest user requests and, based on the request type, dispatch requests to the appropriate microservice for processing. The company is using Amazon API Gateway to deploy the API front end, and an AWS Lambda function that invokes Amazon DynamoDB to store user requests before dispatching them to the processing microservices.
 
+The company provisioned as much DynamoDB throughput as its budget allows, but the company is still experiencing availability issues and is losing user requests.
 
+What should a solutions architect do to address this issue without impacting existing users?
 
+D. Use the Amazon Simple Queue Service (Amazon SQS) queue and Lambda to buffer writes to DynamoDB.
 
+Amazon SQS: Acts as a buffer between API Gateway/Lambda and DynamoDB. The API accepts requests and places them into an SQS queue. A Lambda function processes messages from the queue and writes them to DynamoDB at a rate the database can handle. If DynamoDB temporarily reaches its throughput limit, messages remain safely in SQS until they can be processed.
 
 ----------------------------------------------------------------------------------------
 
