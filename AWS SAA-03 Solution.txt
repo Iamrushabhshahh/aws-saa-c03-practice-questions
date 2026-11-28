@@ -1352,11 +1352,18 @@ By utilizing ElastiCache for session data management, you can store and retrieve
 The use of ElastiCache allows for a distributed and shared data store for session management across multiple instances and Availability Zones.
 ------------------------------------------------------------------------------------------------
 
-210] 
+210] A company offers a food delivery service that is growing rapidly. Because of the growth, the company’s order processing system is experiencing scaling problems during peak traffic hours. The current architecture includes the following:
 
+• A group of Amazon EC2 instances that run in an Amazon EC2 Auto Scaling group to collect orders from the application
+• Another group of EC2 instances that run in an Amazon EC2 Auto Scaling group to fulfill orders
 
+The order collection process occurs quickly, but the order fulfillment process can take longer. Data must not be lost because of a scaling event.
 
+A solutions architect must ensure that the order collection process and the order fulfillment process can both scale properly during peak traffic hours. The solution must optimize utilization of the company’s AWS resources.
 
+Which solution meets these requirements?
+
+D. Provision two Amazon Simple Queue Service (Amazon SQS) queues: one for order collection and another for order fulfillment. Configure the EC2 instances to poll their respective queue. Create a metric based on a backlog per instance calculation. Scale the Auto Scaling groups based on this metric.
 
 ----------------------------------------------------------------------------------------------
 
@@ -1444,7 +1451,16 @@ E. Update the network ACL to allow inbound TCP port 443 from source 0.0.0.0/0 an
 
 Which solution will resolve these issues in the MOST operationally efficient way?
 
+D. Modify the CloudFormation templates. Replace the EC2 instances with R5 EC2 instances. Deploy the Amazon CloudWatch agent on the EC2 instances to generate custom application latency metrics for future capacity planning.
 
+1. The application needs in-memory processing.
+- M5 instances are general-purpose instances.
+- R5 instances are memory-optimized instances.
+- R5 provides more memory relative to CPU capacity, making it better suited to memory-intensive workloads.
+2. The company needs application-level performance metrics.
+- EC2's standard CloudWatch metrics don't include memory utilization by default.
+- The CloudWatch Agent collects additional metrics from inside the EC2 instances.
+- It can collect memory utilization and custom application metrics, including latency.
 
 --------------------------------------------------------------------------------------------------
 
@@ -1490,12 +1506,23 @@ This IAM role should have the necessary permissions to interact with DynamoDB. Y
 By creating a VPC endpoint for DynamoDB, you allow your EKS pods to access DynamoDB directly within the AWS network without traversing the public internet. This enhances security and reduces the risk of exposure.
 ----------------------------------------------------------------------------------------
 
-224] 
+224] A company recently migrated its web application to AWS by rehosting the application on Amazon EC2 instances in a single AWS Region. The company wants to redesign its application architecture to be highly available and fault tolerant. Traffic must reach all running EC2 instances randomly.
 
+Which combination of steps should the company take to meet these requirements? (Choose two.)
 
+C. Create an Amazon Route 53 multivalue answer routing policy.
+E. Launch four EC2 instances: two instances in one Availability Zone and two instances in another Availability Zone.
 
-
-
+Explanation:
+C. Route 53 multivalue answer routing policy
+- Returns multiple healthy IP addresses in response to DNS queries.
+- Traffic is distributed randomly among the returned IP addresses.
+- If an endpoint becomes unhealthy, Route 53 can exclude it from DNS responses.
+E. Launch four EC2 instances across two Availability Zones
+- Two instances in AZ 1.
+- Two instances in AZ 2.
+- If one AZ fails, the other AZ still has two running instances.
+- Distributing instances across AZs provides fault tolerance.
 
 -------------------------------------------------------------------------------------
 
@@ -1583,10 +1610,6 @@ VPC peering allows direct connectivity between two VPCs. This solution enables c
 
 232] A company runs demonstration environments for its customers on Amazon EC2 instances. Each environment is isolated in its own VPC. The company’s operations team needs to be notified when RDP or SSH access to an environment has been established.
 
-B. Configure the EC2 instances with an IAM instance profile that has an IAM role with the AmazonSSMManagedInstanceCore policy attached.
-
-The correct option for notifying the operations team when RDP or SSH access to an environment has been established is:
-
 C. Publish VPC flow logs to Amazon CloudWatch Logs. Create required metric filters. Create an Amazon CloudWatch metric alarm with a notification action for when the alarm is in the ALARM state.
 
 Here's why:
@@ -1621,11 +1644,11 @@ Using AWS KMS to encrypt EBS volumes and Aurora database storage at rest is a go
 Attaching an ACM certificate to the ALB allows you to use HTTPS, which encrypts data in transit between clients and the ALB. This ensures secure communication over the network.
 ----------------------------------------------------------------------------------------------------
 
-235] 
+235] A company is moving its on-premises Oracle database to Amazon Aurora PostgreSQL. The database has several applications that write to the same tables. The applications need to be migrated one by one with a month in between each migration. Management has expressed concerns that the database has a high number of reads and writes. The data must be kept in sync across both databases throughout the migration.
 
+What should a solutions architect recommend?
 
-
-
+C. Use the AWS Schema Conversion Tool with AWS Database Migration Service (AWS DMS) using a memory optimized replication instance. Create a full load plus change data capture (CDC) replication task and a table mapping to select all tables.
 
 ----------------------------------------------------------------------------------------------
 
@@ -1827,10 +1850,13 @@ B. allows multiple versions of objects in the S3 bucket to be stored. This ensur
 D. adds an extra layer of protection against accidental deletion of objects in the bucket. With MFA Delete enabled, a user would need to provide an additional authentication factor to successfully delete objects from the bucket. This helps prevent accidental or unauthorized deletions and provides an extra level of security for critical documents.
 --------------------------------------------------------------------------------
 
-257] 
+257] A company is building a solution that will report Amazon EC2 Auto Scaling events across all the applications in an AWS account. The company needs to use a serverless solution to store the EC2 Auto Scaling status data in Amazon S3. The company then will use the data in Amazon S3 to provide near-real-time updates in a dashboard. The solution must not affect the speed of EC2 instance launches.
 
+How should the company move the data to Amazon S3 to meet these requirements?
 
+A. Use an Amazon CloudWatch metric stream to send the EC2 Auto Scaling status data to Amazon Kinesis Data Firehose. Store the data in Amazon S3.
 
+Important nuance: EC2 Auto Scaling lifecycle events are EventBridge events, not CloudWatch metrics. If the question literally requires every scaling activity status event (rather than metrics), EventBridge would be the more appropriate source. The wording here is technically imprecise, but A is the intended answer among the options.
 
 -------------------------------------------------------------------------------------
 
